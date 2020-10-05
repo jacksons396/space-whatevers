@@ -16,27 +16,25 @@ let Death_spike_1 = game.createSprite(0, 5)
 let Death_spike_2 = game.createSprite(5, 5)
 let Level_up = 60
 basic.forever(function () {
-    if (Lives == 0) {
-        sprite.delete()
-        basic.showString("Game over")
-    }
-    if (Rock.isTouching(sprite)) {
-        sprite.delete()
-        basic.showString("Game Over," + "Score =" + Score + "/60")
+    if (Rock_2.get(LedSpriteProperty.Y) == sprite.get(LedSpriteProperty.Y)) {
+        basic.pause(500)
+        Rock_2.set(LedSpriteProperty.Y, 0)
+        Rock_2.set(LedSpriteProperty.X, randint(1, 5))
+        Score += 1
+        basic.pause(10)
     }
 })
 basic.forever(function () {
     if (Rock.get(LedSpriteProperty.Y) == sprite.get(LedSpriteProperty.Y)) {
+        basic.pause(200)
         Rock.set(LedSpriteProperty.Y, 0)
         Rock.set(LedSpriteProperty.X, randint(1, 5))
+        Score += 1
+        basic.pause(10)
     }
 })
 basic.forever(function () {
-    if (Rock_2.get(LedSpriteProperty.Y) == sprite.get(LedSpriteProperty.Y)) {
-        Rock_2.set(LedSpriteProperty.Y, 0)
-        Rock_2.set(LedSpriteProperty.X, randint(1, 5))
-        Score += 1
-    }
+	
 })
 basic.forever(function () {
     if (Score == Level_up) {
@@ -52,14 +50,6 @@ basic.forever(function () {
     basic.pause(randint(200, 300))
 })
 basic.forever(function () {
-    if (Lives == 0) {
-        sprite.delete()
-        basic.showString("Game over")
-    }
-    if (Rock_2.isTouching(sprite)) {
-        sprite.delete()
-        basic.showString("Game Over," + "Score =" + Score)
-    }
     if (Death_spike_1.isTouching(sprite)) {
         sprite.delete()
         basic.showString("Game Over," + "Score =" + Score)
@@ -67,5 +57,17 @@ basic.forever(function () {
     if (Death_spike_2.isTouching(sprite)) {
         sprite.delete()
         basic.showString("Game Over," + "Score =" + Score)
+    }
+})
+basic.forever(function () {
+    if (Rock.isTouching(sprite)) {
+        sprite.delete()
+        basic.showString("Game Over," + "Score =" + Score + "/60")
+    }
+})
+basic.forever(function () {
+    if (sprite.isTouching(Rock_2)) {
+        sprite.delete()
+        basic.showString("Game Over," + "Score =" + Score + "/60")
     }
 })
